@@ -11,6 +11,7 @@ std::map<uint16_t, uint32_t> edgeric::cqi_dl_ues = {};
 std::map<uint16_t, float> edgeric::rx_bytes_ues = {};
 std::map<uint16_t, float> edgeric::tx_bytes_ues = {};
 std::map<uint16_t, uint32_t> edgeric::backlogBufferDL = {};
+static std::map<uint16_t, float> ue_latency; // EDIT: Map to store latency for each UE
 
 bool edgeric::enable_logging = false; // Initialize logging flag to false
 
