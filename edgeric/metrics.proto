@@ -8,6 +8,7 @@ message UeMetrics {
     uint32 pending_data = 5;
     float tx_bytes = 6;
     float rx_bytes = 7;
+    float latency = 8; // EDIT: added latency (also see srsran-enb/srsenb/protobufs/metrics.proto)
 }
 
 message Metrics {
