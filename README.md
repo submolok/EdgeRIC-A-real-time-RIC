@@ -5,4 +5,6 @@ Refer to full paper: https://www.usenix.org/system/files/nsdi24-ko.pdf
 
 Refer to EdgeRIC documentation: https://edgeric.github.io/
 
-Refer to how to run the reposiry: https://edgeric.github.io/edgeric-workshop-tutorial.html
+Refer to how to run the repository: https://edgeric.github.io/edgeric-workshop-tutorial.html
+
+Note: the edits on this branch are denoted with an "EDIT" comment next to the edited line
