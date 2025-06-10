@@ -43,6 +43,8 @@
 #include <string> 
 #include <map>  // For std::to_string
 
+#include "srsran/common/byte_buffer.h"  // EDIT: for latency measure
+
 // #define WRITE_SIB_PCAP
 using namespace asn1::rrc;
 
@@ -668,6 +670,9 @@ void mac::ric_comm()
   static mac_ue_metrics_t ue_metrics;
   tti_ran_index += 1;
 
+  srsran::byte_buffer_t buffer;
+  buffer.set_timestamp()    // EDIT: Measuring latency
+
   // edgeric::get_from_er();
   edgeric::setTTI(tti_ran_index);
 
@@ -681,6 +686,10 @@ void mac::ric_comm()
   // rx_bytes_ues.clear();
   edgeric::setTXbytes(tx_bytes_ues);
   // tx_bytes_ues.clear();
+
+  // EDIT: calulating and updating latency
+  auto ue_latency = buffer.get_latency_us();
+  edgeric::setLatency(ue_latency.count());
 
   edgeric::printmyvariables();
   edgeric::send_to_er_protobuf();
