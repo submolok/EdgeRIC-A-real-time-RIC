@@ -26,6 +26,9 @@
 #include "srsran/rlc/rlc_um_lte.h"
 #include "srsran/rlc/rlc_um_nr.h"
 
+#include "srsran/common/byte_buffer.h"  // EDIT: files for the latency stuff
+#include "srsran/common/common.h"  // EDIT: files for the latency stuff
+
 namespace srsran {
 
 rlc::rlc(const char* logname) : logger(srslog::fetch_basic_logger(logname)), pool(byte_buffer_pool::get_instance())
@@ -282,6 +285,7 @@ uint32_t rlc::get_total_mch_buffer_state(uint32_t lcid)
 
 uint32_t rlc::read_pdu(uint32_t lcid, uint8_t* payload, uint32_t nof_bytes)
 {
+  buffer_latency_calc latency_calc; // EDIT: defining the strucutre with latency measure
   uint32_t ret = 0;
 
   rwlock_read_guard lock(rwlock);
@@ -293,6 +297,8 @@ uint32_t rlc::read_pdu(uint32_t lcid, uint8_t* payload, uint32_t nof_bytes)
   }
 
   srsran_expect(ret <= nof_bytes, "Created too big RLC PDU (%d > %d)", ret, nof_bytes);
+  long latency_us=latency_calc.get_latency_us();  // EDIT: get latency
+  std::cout<<"PDU handover latency: " << latency_us <<" microseconds"std::dnl;  // EDIT
 
   return ret;
 }
